@@ -18,13 +18,13 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                flash('Вы успешно вошли!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
                 flash('Неправильный пароль, попробуйте снова.', category='error')
         else:
-            flash('Адрес эл. почта не существует ', category='error')
+            flash('Адрес эл. почты не существует ', category='error')
 
     return render_template("login.html", user=current_user)
 

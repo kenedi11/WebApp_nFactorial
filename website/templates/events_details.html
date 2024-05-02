@@ -8,7 +8,17 @@
     <div class="row">
         <div class="col-md-6 mb-4">
             <div class="card-body">
-                <img src="{{ event.img_url }}" class="card-img-top">
+                <div class="mb-3">
+                    <img src="{{ event.img_url }}" class="card-img-top">
+                </div>
+                {% if current_user.is_authenticated %}
+                <div class="mb-3">
+                    <form action="/save" method="POST">
+                        <input type="hidden" name="event_id" value="{{ event.id }}">
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="col-md-6 mb-4">
@@ -16,7 +26,10 @@
                 <h5 class="card-title">Описание</h5>
                 <p class="card-text">{{ event.description }}</p>
                 <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
-                <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.event_datetime }}</p>
+                <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.event_date }}</p>
+                <p class="card-text"><i class="fas fa-user"></i> {{ event.organizer }}</p>
+                <p class="card-text"><i class="far fa-clock"></i> <b> Дедлайн регистрации:  </b> {{ event.registration_deadline }}</p>
+                <p class="card-text"><i class="fas fa-money-bill-wave"></i> {{ event.price }}</p>
             </div>
         </div>
     </div>

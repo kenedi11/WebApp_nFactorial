@@ -30,37 +30,53 @@
       </button>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Афиша</a>
-            </li>
-            <li class="nav-item">
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Войти</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="selectCityDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Выбрать город
-              </a>
-              <div class="dropdown-menu" aria-labelledby="selectCityDropdown">
-                <a class="dropdown-item" href="#">Астана</a>
-                <a class="dropdown-item" href="#">Алматы</a>
-                <a class="dropdown-item" href="#">Шымкент</a>
-              </div>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Афиша</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="selectCityDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Выбрать город
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="selectCityDropdown">
+                    <form method="POST" action="{{ url_for('views.select_city') }}">
+                        <input type="hidden" name="city" value="Астана">
+                        <button type="submit" class="dropdown-item">Астана</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('views.select_city') }}">
+                      <input type="hidden" name="city" value="Алматы">
+                      <button type="submit" class="dropdown-item">Алматы</button>
+                  </form>
+                  <form method="POST" action="{{ url_for('views.select_city') }}">
+                    <input type="hidden" name="city" value="Шымкент">
+                    <button type="submit" class="dropdown-item">Шымкент</button>
+                </form>
+                </div>
+                
+              </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Выйти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/saved">Сохраненные</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Войти</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Поиск">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+            </form>
         </div>
-      </nav>
-      
-    </nav>
+    </nav>    
+  </nav>
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %} {% if category ==
       'error' %}

@@ -3,19 +3,16 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="mt-4 mb-4 text-center">Мероприятия</h2>
+    <h2 class="mt-4 mb-4 text-center">Events in {{ city }}</h2>
     <div class="row">
         {% for event in events %}
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="{{ event.img_url }}" class="card-img-top" alt="{{ event.event_name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ event.event_name }}</h5>
+                    <img src="{{ event.img_url }}" class="card-img-top" alt="{{ event.event_name }}">
                     <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
                     <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.event_date }}</p>
-                </div>
-                <div class="card-footer">
-                    <a href="{{ url_for('views.event_details', event_id=event.id) }}" class="btn btn-primary">Подробнее</a>
                 </div>
             </div>
         </div>
