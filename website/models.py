@@ -15,8 +15,9 @@ class Events(db.Model):
     registration_deadline = db.Column(db.DateTime)
     price = db.Column(db.Integer)
     img_url = db.Column(db.String(255))
+    city  = db.Column(db.String(50))
 
-    def __init__(self, event_name, description, event_date, location, organizer, category, price):
+    def __init__(self, event_name, description, event_date, location, organizer, category, price, city):
         self.event_name = event_name
         self.description = description
         self.event_date = event_date
@@ -24,6 +25,7 @@ class Events(db.Model):
         self.organizer = organizer
         self.category = category
         self.price = price
+        self.city = city
 
 
 class User(db.Model, UserMixin):
